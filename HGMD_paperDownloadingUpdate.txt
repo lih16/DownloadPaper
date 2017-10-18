@@ -20,3 +20,6 @@ The Plan on HGMD papers downloading:
         We have downloaded 6185 papers since AUG (2017).             File: DownloadedsinceAUGpmid.txt
         32445 (= 38630 - 6185) papers are not downloaded yet.                
 --------------------------------------------------------------------------------------------------------------------
+
+Oct. 18, 2017
+        We have downloaded 6310 papers. Today I downloaded 125 files around 4.5 hours. 
