@@ -9,3 +9,14 @@ The Plan on HGMD papers downloading:
  When the code works fine, we plan to download 200 papers per day.  
 
  Oct. Worked on Java code. 
+
+
+ Oct. 18, 2017
+ --------------------------------------------------------------------------------------------------------------------
+        47242 papes  HGMD (TAG='DM') (total)                         File: HGMDMDpid.txt
+        8616 papers Downloaded before Aug (2017)                     File: HGMDDMdownloadedbeforeAUGpmid.txt
+        38630 papers need to be downloaded                           File: HGMDafterAUGpmid.txt
+
+        We have downloaded 6185 papers since AUG (2017).             File: DownloadedsinceAUGpmid.txt
+        32445 (= 38630 - 6185) papers are not downloaded yet.                
+--------------------------------------------------------------------------------------------------------------------
