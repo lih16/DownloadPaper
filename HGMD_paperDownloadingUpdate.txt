@@ -24,3 +24,8 @@ The Plan on HGMD papers downloading:
 Oct. 18, 2017
         We have downloaded 6310 papers. Today I downloaded 125 files around 4.5 hours. 
         All the pdf files are in minerva at /sc/orga/projects/AILUN/fulltext_PDF/HGMD_DMpapers
+
+Oct. 19, 2017
+        We have downloaded 6572 papers. ( I removed some of papers that are not pdf format).
+        All the pdf files are in minerva at /sc/orga/projects/AILUN/fulltext_PDF/HGMD_DMpapers.
+
