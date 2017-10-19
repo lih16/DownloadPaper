@@ -193,14 +193,18 @@ System.out.println("urlF [" + urlF + "]");
             }
             // strength rule1
 
+System.out.println("rule1");
             if (sb.toString().contains("citation_pdf_url")) {
             Pattern pattern = Pattern.compile("citation_pdf_url\"\\s+content=(.+)\"");
             Matcher matcher = pattern.matcher(sb.toString());
            
             if (matcher.find() == false){
+               ;
+              /*
                 type = 100;
                System.out.println("BAD type 2 PDF header ");
                return "NA";
+               */
             } else {
                String fullStr = matcher.group(1);
                String fullURL = StringUtils.substringBetween(fullStr, "\"", "\"");
@@ -209,6 +213,8 @@ System.out.println("urlF [" + urlF + "]");
             }
 
 
+
+System.out.println("rule2");
             // strength rule2 nature
             if (sb.toString().contains("www.nature.com.eresources.mssm.edu/favicon")) {
                  Pattern pattern = Pattern.compile("download-pdf\"\\s+href=(.+)\"");
@@ -224,9 +230,28 @@ System.out.println("urlF [" + urlF + "]");
                  }
              }
             
+System.out.println("rule8");
+            // strengthened rule8
+            if (sb.toString().contains("online.liebertpub.com")) {
+System.out.println(" rule 8  enter ") ;
+          
+                 String urlRaw = StringUtils.substringBetween(sb.toString(), "\"pdfLink\"", "target=");
+                 String fullStr = StringUtils.substringBetween(urlRaw, "\"", "\"");
+ 
+                 if (fullStr == null){
+                    type = 100;
+                    System.out.println("BAD type 2 PDF header ");
+                    return "NA";
+                 } else {
+                    return (new String("http://online.liebertpub.com"+fullStr)); 
+                 }
+             }
+
+System.out.println("rule3");
              // strengthen rule3 Tlsevier
             if (sb.toString().contains("pdfLink")) {
                  Pattern pattern = Pattern.compile("pdfLink\"\\s+href=(.+)\"");
+                 //Pattern pattern = Pattern.compile("pdfLink\"\\s+href=(.+)\"");
                  Matcher matcher = pattern.matcher(sb.toString());
                  if (matcher.find() == false){
                     type = 100;
@@ -239,6 +264,7 @@ System.out.println("urlF [" + urlF + "]");
                 }
             }
 
+System.out.println("rule6");
             // strengthed rule6 science
             if (sb.toString().contains("www.sciencedirect.com/science/")) {
                  Pattern pattern = Pattern.compile("pdf-download-btn-link\"\\s+href=(.+)\"");
@@ -253,50 +279,32 @@ System.out.println("urlF [" + urlF + "]");
                     return (new String("http://www.sciencedirect.com"+fullURL)); 
                  }
              }
-            // strengthened rule8
-            if (sb.toString().contains("online.liebertpub.com")) {
-                 Pattern pattern = Pattern.compile("pdfprint\"\\s+(.+)href=(.+)\"");
-                 Matcher matcher = pattern.matcher(sb.toString());
-                 if (matcher.find() == false){
-                    type = 100;
-                    System.out.println("BAD type 2 PDF header ");
-                    return "NA";
-                 } else {
-                    String fullStr = matcher.group(1);
-                    String fullURL = StringUtils.substringBetween(fullStr, "\"", "\"");
-                    return (new String("http://online.liebertpub.com"+fullURL)); 
-                 }
-             }
  
             // strengthened rule9
             if (sb.toString().contains("citation_pdf_url")) {
-            Pattern pattern = Pattern.compile("content=\"(.+)\"\\s+name=\"citation_pdf_url");
-            Matcher matcher = pattern.matcher(sb.toString());
-           
-            if (matcher.find() == false){
-                type = 100;
-               System.out.println("BAD type 2 PDF header ");
-               return "NA";
-            } else {
-               String fullStr = matcher.group(1);
-               String fullURL = StringUtils.substringBetween(fullStr, "\"", "\"");
-               return fullURL; 
+             String rStr = StringUtils.substringBetween(sb.toString(), "\"citation_fulltext_html_url\"", "\"citation_pdf_url\"");
+                 System.out.println("H "+ rStr);
+                 if (rStr != null ) {
+                 return (StringUtils.substringBetween(rStr,"\"", "\""));
+                 } else {
+                   type = 100;
+                   return "NA";
+                 }
             }
-            }
-            // strengthened rula10e
-            if (sb.toString().contains("journals.sagepub.com")) {
-            Pattern pattern = Pattern.compile("href=\"(.+)\"\\s+class=\"show-pdf");
-            Matcher matcher = pattern.matcher(sb.toString());
-           
-            if (matcher.find() == false){
-                type = 100;
-               System.out.println("BAD type 2 PDF header ");
-               return "NA";
-            } else {
-               String fullStr = matcher.group(1);
-               String fullURL = StringUtils.substringBetween(fullStr, "\"", "\"");
-                  return (new String("http://journals.sagepub.com.eresources.mssm.edu"+fullURL)); 
-            }
+            // strengthened rule10
+            if (sb.toString().contains("www.sagepub.com")) {
+System.out.println("rule10e");
+               String fullURL = StringUtils.substringBetween(sb.toString(), "\"show-references\"", "\"show-pdf\"");
+               String fullStr = StringUtils.substringBetween(fullURL,"href", "Cited");
+               String rtnStr =  StringUtils.substringBetween(fullStr,"\"", "\"");
+               if (rtnStr != null) {
+System.out.println("rule10e" + fullStr);
+                   return (new String("http://www.sagepub.com.eresources.mssm.edu"+rtnStr)); 
+               } else {
+                 type = 100;
+                  return "NA";
+               }
+ 
             }
 
         return "NA";
@@ -423,45 +431,51 @@ System.out.println("PMID " + inf);
                 
                     //String writeURL=new String("https://academic.oup.com/jcem/article-pdf/84/2/405/13122083/jcem0405.pdf");
                     // writeURL=new String("https://academic.oup.com/jcem/article-pdf/84/2/405/13122083/jcem0405.pdf");
+                    //writeURL="http://www.neurology.org/content/70/8/617.full.pdf";
                     if (type != 100) { 
 
                       CloseableHttpClient httpClient = HttpClients.custom().setRedirectStrategy(new LaxRedirectStrategy()).build();
 
                        HttpClientContext context = HttpClientContext.create();
-
                        HttpGet httpGet = new HttpGet(writeURL);
+                       //HttpGet httpGet = new HttpGet("http://www.google.com");
+                       if (cookieValue != null ) {
+                              httpGet.setHeader("Cookie", cookieValue);
+                       }
+System.out.println("executing request "+ httpGet.getRequestLine() );
+                       httpClient.execute(httpGet, context);
+                       HttpHost target = context.getTargetHost();
+                       List<URI> redirectLocations = context.getRedirectLocations();
+                       URI location = URIUtils.resolve(httpGet.getURI(), target, redirectLocations);
+System.out.println("final location  ["+ location.toASCIIString() + "]");
+                        HttpGet httpet = new HttpGet(location.toASCIIString());
+                         httpet.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:34.0) Gecko/20100101 Firefox/34.0");
+                         httpet.addHeader("Referer", "https://www.google.com");
+                          if (cookieValue != null ) {
+                           httpet.setHeader("Cookie", cookieValue);
+                          }
+                          HttpClient httpc = HttpClientBuilder.create().build();
+                          HttpResponse httpResponse = httpc.execute(httpet);
+                          HttpEntity fileEntity = httpResponse.getEntity();
+System.out.println("PDF length " + fileEntity.getContent().toString());
 
- URL url = new URL(writeURL);
-HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-conn.setDoOutput(true);
-conn.setRequestMethod("PUT");
-if (cookieValue != null ) {
-     conn.setRequestProperty("Cookie", cookieValue);
-}
-conn.connect();
+                          /*
 
-//OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
-//writer.write(URLEncoder.encode(jsonObj.toString(), "UTF-8"));
-//writer.close();
-/*
-int respCode = conn.getResponseCode();  // New items get NOT_FOUND on PUT
-if (respCode == HttpURLConnection.HTTP_OK || respCode == HttpURLConnection.HTTP_NOT_FOUND) {
-  //req.setAttribute("error", "");
-  StringBuffer response = new StringBuffer();
-*/
-  BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-  String line;
-  while ((line = reader.readLine()) != null) {
-System.out.println("line " + line);
-    //response.append(line);
-  }
-  reader.close();
-  //req.setAttribute("response", response.toString());
-//} else {
-   ;
-  //req.setAttribute("error", conn.getResponseCode() + " " + conn.getResponseMessage());
-//}
+                        String strLine="";
+                        StringBuilder sb = new StringBuilder();
 
+                     Thread.sleep(5000);
+            
+            while ((strLine = br.readLine()) != null)   {
+System.out.println("strLine " + strLine);
+                sb.append(strLine);
+            }
+
+                          */
+
+                            if (fileEntity != null) {
+                              FileUtils.copyInputStreamToFile(fileEntity.getContent(), new File("downloadPDFFile/javaCode_Dir/"+pmid+".pdf"));
+                              }
 
                         return 1;
 

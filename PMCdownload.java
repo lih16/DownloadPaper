@@ -225,15 +225,20 @@ public class PMCdownload {
         int rtnCodeFetch = 0;
 
         System.out.println("length of input list[" + al.size() + "]");
+        BufferedWriter writer = null;
+        File logFile = new File("downloadPDFFile/log.txt");
 
+    try {
+         writer = new BufferedWriter(new FileWriter(logFile, true));
+ 
         for (String str : al) {
 
                       //fetch Random time to sleep 
                       int rand;
-                      rand = ThreadLocalRandom.current().nextInt(1,8);
+                      rand = ThreadLocalRandom.current().nextInt(1,9);
                       System.out.println("JavaCode fetch ["+ str + "] random:[" + rand + "]" );
                       try {
-                         Thread.sleep(rand * 8000); 
+                         Thread.sleep(rand * 6239 + 3); 
                       } catch (Exception e) {
                          System.out.println(e);
                       }
@@ -244,7 +249,12 @@ public class PMCdownload {
                 cnt_API = cnt_API + 1;
                 rtnAPIFetch = pmcAPIFetchPDF(map.get(str), str);
                 System.out.println(" rtnAPIFetch ["+ rtnAPIFetch + "]");
-                if (rtnAPIFetch == 1) continue;
+                if (rtnAPIFetch == 1) {
+                      writer.write(str + " is fetched by API");
+                      writer.newLine();
+                      writer.flush();
+                      continue;
+                }
              } 
 
 
@@ -253,24 +263,36 @@ public class PMCdownload {
                  System.out.println("FTP fetch ["+ str + "]");
                  rtnftpFetch = ftpFetchPackage(ftpPath.get(str), str);
                  System.out.println(" rtnftpFetch ["+ rtnftpFetch + "]");
-                 if (rtnftpFetch == 1) continue;
+                 if (rtnftpFetch == 1) {
+                      writer.write(str + " is fetched by ftp");
+                      writer.newLine();
+                      writer.flush();
+                      continue;
+                 }
              } 
-
-
-            // if ((rtnftpFetch == -1) || (rtnAPIFetch == -1)) {
 
 
                       System.out.println("JavaCode fetch ["+ str + "] random:[" + rand + "]" );
                       ParseMissingPMID codesolution = new ParseMissingPMID();
                       rtnCodeFetch = codesolution.fetchPDF(str, cookieValue);
+                      if (rtnCodeFetch  == 1 ) {
+                      writer.write(str + " is fetched by Java Code");
+                      writer.newLine();
+                      writer.flush();
+                         
+                      } else {
+                      writer.write(str + " should be fetched by Java Code, but failed ...");
+                      writer.newLine();
+                      writer.flush();
+                      }
                       System.out.println(" rtnCodeFetch ["+ rtnCodeFetch + "]");
-
-                    
-
-             //}
            
         }
         System.out.println(" input LEN :" + al.size() + " API num :[" + cnt_API + "]");
         System.out.println("LENGTH of Map "+ map.size());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        writer.close();
     }
 }
