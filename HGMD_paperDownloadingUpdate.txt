@@ -29,3 +29,7 @@ Oct. 19, 2017
         We have downloaded 6572 papers. ( I removed some of papers that are not pdf format).
         All the pdf files are in minerva at /sc/orga/projects/AILUN/fulltext_PDF/HGMD_DMpapers.
 
+Oct. 20, 2017
+        We have downloaded 6963 papers.
+        All the pdf files are in minerva at /sc/orga/projects/AILUN/fulltext_PDF/HGMD_DMpapers.
+
