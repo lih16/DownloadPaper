@@ -1,0 +1,17 @@
+
+
+Num of PDF: 9693
+
+
+
+                                         ------------ html files  (1441, see htmlPMID.txt)
+                                         |
+                                         |
+SIZE 0 TXT files: 2008   ----------------|----------- malformed pdf files (133, see malpdfPMID.txt)
+(see zeroPMID.txt)                       |                      
+                                         |
+                                         ------------ access limited pdf files (434, see accesslimitedPMID.txt)
+
+
+NOTE: for malformed pdf files, maybe the downloaded files' lengths are different from their original length.
+      We can use  tika.parser package for this case. I would continue to try.  
