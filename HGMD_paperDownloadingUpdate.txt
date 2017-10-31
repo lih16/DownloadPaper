@@ -52,3 +52,9 @@ Oct. 30, 2017
       We have downloaded MVL papers 2113. So we still need to download 2325 papers. 2325 = 4438 - 2113. 
       All the pdf files are in minvera at /sc/orga/projects/AILUN/fulltext_PDF/MVL_papers
 
+Oct. 31, 2017
+      We have downloaded 10796 papers for HGMD (DM). So we still need to download 27830 papers (38626 - 10796).   
+      All the pdf files are in minerva at /sc/orga/projects/AILUN/fulltext_PDF/HGMD_DMpapers. 
+
+      We have downloaded MVL papers 2134. So we still need to download 2304  papers. 2304 = 4438 - 2134. 
+      All the pdf files are in minvera at /sc/orga/projects/AILUN/fulltext_PDF/MVL_papers
