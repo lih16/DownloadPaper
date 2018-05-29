@@ -746,3 +746,28 @@ May. 07, 2018
 
       We have downloaded 38683 HGMD (DM) papers.  4970 papers are needed to be downloaded ((38626 + 5027) - 38683). Medium priority.
       All the pdf files are in minerva at /sc/orga/projects/AILUN/fulltext_PDF/HGMD_DMpapers.
+
+May. 14, 2018
+      We have downloaded 6206  papers for  Machine Learning (7375 PMIDs requested on 2018-02-26).   1039 papers are not able to be downloaded due to 
+      non-English or access issue.  130  papers are needed to be downloaded. High priority.
+
+
+      We have downloaded 38683 HGMD (DM) papers.  4970 papers are needed to be downloaded ((38626 + 5027) - 38683). Medium priority.
+      All the pdf files are in minerva at /sc/orga/projects/AILUN/fulltext_PDF/HGMD_DMpapers.
+
+May. 21, 2018
+
+      We have downloaded 6214  papers for  Machine Learning (7375 PMIDs requested on 2018-02-26).   1161 papers are not able to be downloaded due to non-English or access issue.  High priority.
+      All the pdf files are in minerva /sc/orga/projects/AILUN/fulltext_PDF/ML_1_Feb_26_2018. 
+
+      We have downloaded 39001 HGMD (DM) papers. 4652 papers are needed to be downloaded ((38626 + 5027) - 39001). Medium priority.
+      All the pdf files are in minerva at /sc/orga/projects/AILUN/fulltext_PDF/HGMD_DMpapers.
+
+
+May. 28, 2018
+      We have downloaded 6214  papers for  Machine Learning (7375 PMIDs requested on 2018-02-26).   1161 papers are not able to be downloaded due to non-English or access issue.  High priority.
+      All the pdf files are in minerva /sc/orga/projects/AILUN/fulltext_PDF/ML_1_Feb_26_2018. 
+
+      We have downloaded 39426 HGMD (DM) papers. 4227 papers are needed to be downloaded ((38626 + 5027) - 39426). Medium priority.
+      All the pdf files are in minerva at /sc/orga/projects/AILUN/fulltext_PDF/HGMD_DMpapers.
+
